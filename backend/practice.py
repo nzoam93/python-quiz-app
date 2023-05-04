@@ -1,6 +1,7 @@
 from flask import Flask
 import json  
 import psycopg2
+from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
 
@@ -17,8 +18,16 @@ def return_questions():
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM questions") #SQL query to get all the questions
     data = cursor.fetchall() #stores the questions in a variable called data
-    jsonified = json.dumps(data)
-    return jsonified
+    
+    #parsing the data from postgres and returning it as a json
+    columns = ( 'id', 'question', 'answerA', 'answerB', 'answerC', 'answerD', 'correctAnswer')
+    results = {}
+    i = 1
+    for row in data:
+        question = dict(zip(columns, row))
+        results[str(i)] = question
+        i += 1
+    return json.dumps(results, indent=2)
 
     # getting the json from a file rather than the backend
     # with open('questions.json') as f: 
