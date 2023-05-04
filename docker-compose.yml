@@ -1,7 +1,7 @@
 version: '3'
 services:
   backend:
-    image: python-backend
+    image: nzoam93/python-app-backend
     ports:
       - "8080:8080" #...:8080 because I configured it to listen to 8080 in the python script
     networks:
@@ -13,17 +13,17 @@ services:
     # This ensures that the Postgres container is built and running before python tries to access it
     
   frontend:
-    image: python-frontend
+    image: nzoam93/python-app-frontend
     ports: 
       - "3000:80" #What you expose to the host: what the application is actually running in the container
     networks:
       - my-network
 
-    #added to try to serve the backend api 
-    links:
-      - backend
+    #added to try to serve the backend api. No longer seems necessary
+    # links:
+    #   - backend
   db:
-    image: db-python-trial
+    image: nzoam93/python-app-db
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword

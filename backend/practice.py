@@ -1,7 +1,6 @@
 from flask import Flask
 import json  
 import psycopg2
-from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
 
