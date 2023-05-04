@@ -1,0 +1,37 @@
+version: '3'
+services:
+  backend:
+    image: python-backend
+    ports:
+      - "8080:8080" #...:8080 because I configured it to listen to 8080 in the python script
+    networks:
+      - my-network
+    depends_on:
+      db:
+        condition: service_started
+    # Specify that the Rails backend container depends on the Postgres container
+    # This ensures that the Postgres container is built and running before python tries to access it
+    
+  frontend:
+    image: python-frontend
+    ports: 
+      - "3000:80" #What you expose to the host: what the application is actually running in the container
+    networks:
+      - my-network
+
+    #added to try to serve the backend api 
+    links:
+      - backend
+  db:
+    image: db-python-trial
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
+    ports: 
+      - "5432:5432"  
+    networks:
+      - my-network
+
+networks:
+  my-network:

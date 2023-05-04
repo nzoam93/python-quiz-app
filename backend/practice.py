@@ -12,9 +12,9 @@ def home_page():
 
 @app.route('/api/questions')
 def return_questions():
-    #establishing the connection to the db
+    #establishing the connection to the db. Note that the host is 'db' because that's the name of the service in the docker-compose file
     conn = psycopg2.connect(
-        database="mydb", user='myuser', password='mypassword', host='127.0.0.1', port= '5432')
+        database="mydb", user='myuser', password='mypassword', host='db', port= '5432')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM questions") #SQL query to get all the questions
     data = cursor.fetchall() #stores the questions in a variable called data
