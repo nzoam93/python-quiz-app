@@ -13,7 +13,8 @@ services:
     # This ensures that the Postgres container is built and running before python tries to access it
     
   frontend:
-    image: nzoam93/python-app-frontend
+    image: python-frontend-new-nginx-name 
+    # image: nzoam93/python-app-frontend
     ports: 
       - "3000:80" #What you expose to the host: what the application is actually running in the container
     networks:
