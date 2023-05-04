@@ -1,0 +1,25 @@
+# Use an official Node.js image as the base image
+FROM node:latest
+
+# Set the working directory in the container
+WORKDIR /frontend_app
+
+#Note: we do NOT want to copy the package-lock.json because that is more specific (and may not work for all architectures)
+# COPY package.json ./
+
+# # Install dependencies
+# RUN npm install 
+
+RUN npm install -g serve
+
+# Copy the rest of the application code to the container
+# COPY public/ ./public
+# COPY src ./src 
+COPY build ./webapp 
+#the build command assume that you have run npm run build on the local computer
+
+# Expose the port where the application will run
+EXPOSE 3000
+
+# Start the application
+CMD ["serve", "-s", "build"]
