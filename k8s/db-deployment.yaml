@@ -1,0 +1,34 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: db-deployment 
+  labels: 
+    app: python-quiz-app
+    tier: db
+spec: 
+  replicas: 3 
+  template: 
+    #metadata and spec from the db-pod.yaml file goes here
+    metadata:
+      name: db-pod
+      labels:
+        app: python-quiz-app 
+        tier: db 
+    spec: 
+      containers:
+      - name: db-container 
+        image: nzoam93/python-app-db
+        env: 
+        - name: POSTGRES_USER
+          value: "myuser"
+        - name: POSTGRES_PASSWORD
+          value: "mypassword"
+        - name: POSTGRES_DB
+          value: "mydb"
+        ports: 
+        - containerPort: 5432 #because PG is listening on port 5432
+  selector: 
+    matchLabels:
+      app: python-quiz-app
+
+      

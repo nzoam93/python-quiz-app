@@ -1,0 +1,27 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: backend-deployment 
+  labels: 
+    app: python-quiz-app
+    tier: backend
+spec: 
+  replicas: 3 
+  template: 
+    #metadata and spec from the backend-pod.yaml file goes here
+    metadata:
+      name: backend-pod
+      labels:
+        app: python-quiz-app 
+        tier: backend 
+    spec: 
+      containers:
+      - name: backend-container 
+        image: nzoam93/python-app-backend
+        ports:
+        - containerPort: 8080 #because backend is listening on port 8080
+  selector: 
+    matchLabels:
+      app: python-quiz-app
+
+      

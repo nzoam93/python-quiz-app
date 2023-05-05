@@ -1,0 +1,27 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: frontend-deployment 
+  labels: 
+    app: python-quiz-app
+    tier: frontend
+spec: 
+  replicas: 3 
+  template: 
+    #metadata and spec from the frontend-pod.yaml file goes here
+    metadata:
+      name: frontend-pod
+      labels:
+        app: python-quiz-app 
+        tier: frontend 
+    spec: 
+      containers:
+        - name: frontend-container 
+          image: nzoam93/python-app-frontend
+          ports:
+          - containerPort: 80 #because nginx frontend listening on port 80
+  selector: 
+    matchLabels:
+      app: python-quiz-app
+
+      

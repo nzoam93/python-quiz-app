@@ -1,0 +1,17 @@
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: backend #note: my frontend application expects this to be exactly "backend"
+  labels:
+    name: backend-service 
+    app: python-quiz-app
+spec: 
+  type: ClusterIP #groups the backend pods together
+  ports: 
+  - port: 8080
+    targetPort: 8080
+  selector: #copy the labels from the backend-pod.yaml file into the selector below
+    app: python-quiz-app 
+    tier: backend 
+    
+    
