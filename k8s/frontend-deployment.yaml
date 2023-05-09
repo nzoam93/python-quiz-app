@@ -6,7 +6,7 @@ metadata:
     app: python-quiz-app
     tier: frontend
 spec: 
-  replicas: 3 
+  replicas: 1
   template: 
     #metadata and spec from the frontend-pod.yaml file goes here
     metadata:
@@ -19,7 +19,7 @@ spec:
         - name: frontend-container 
           image: nzoam93/python-app-frontend
           ports:
-          - containerPort: 80 #because nginx frontend listening on port 80
+          - containerPort: 8081 #because nginx frontend listening on port 8081
   selector: 
     matchLabels:
       app: python-quiz-app

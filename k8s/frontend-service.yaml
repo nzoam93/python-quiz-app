@@ -8,8 +8,8 @@ metadata:
 spec: 
   type: NodePort #makes it accessible to the outside world 
   ports: 
-  - port: 80
-    targetPort: 80
+  - port: 8081 #note: don't have it be 80 or it might give permission issues
+    targetPort: 8081
     nodePort: 30004 #can be a wide variety of numbers. In this case, we are making it accessible on 30004
   selector: #copy the labels from the frontend-pod.yaml file into the selector below
     app: python-quiz-app 

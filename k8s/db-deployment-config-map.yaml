@@ -18,13 +18,9 @@ spec:
       containers:
       - name: db-container 
         image: nzoam93/python-app-db
-        env: 
-        - name: POSTGRES_USER
-          value: "myuser"
-        - name: POSTGRES_PASSWORD
-          value: "mypassword"
-        - name: POSTGRES_DB
-          value: "mydb"
+        envFrom: 
+        - configMapRef:
+            name: db-config
         ports: 
         - containerPort: 5432 #because PG is listening on port 5432
   selector: 

@@ -15,7 +15,7 @@ COPY build /usr/share/nginx/html
 ##########note: the build command assume that you have run 'npm install' and 'npm run build' on the local computer to create the /build folder!
 
 # Expose the port where the application will run
-EXPOSE 80
+EXPOSE 8081
 
 # Start the application
 CMD ["nginx", "-g", "daemon off;"]

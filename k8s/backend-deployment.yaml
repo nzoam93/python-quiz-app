@@ -6,7 +6,7 @@ metadata:
     app: python-quiz-app
     tier: backend
 spec: 
-  replicas: 3 
+  replicas: 1 
   template: 
     #metadata and spec from the backend-pod.yaml file goes here
     metadata:
